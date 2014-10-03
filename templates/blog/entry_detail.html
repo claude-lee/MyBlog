@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "_entry.html" with entry=entry only %}
+{% endblock %}
+
+<hr>
+<h4>Comments</h4>
+{% for comment in entry.comment_set.all %}
+    <p><em>Posted by {{ comment.name }}</em></p>
+    {{ comment|linebreaks }}
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
