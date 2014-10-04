@@ -103,3 +103,25 @@ class CommentFormTest(TestCase):
        with self.assertRaises(KeyError):
            CommentForm()
 
+   def test_valid_data(self):
+       form = CommentForm({
+                              'name': "lisa schmidt",
+                              'email': "lisa.schmidt@example.com",
+                              'body': "Hello world",
+                              }, entry=self.entry)
+       self.assertTrue(form.is_valid())
+       comment = form.save()
+       self.assertEqual(comment.name, "lisa schmidt")
+       self.assertEqual(comment.email, "lisa.schmidt@example.com")
+       self.assertEqual(comment.body, "Hello world")
+       self.assertEqual(comment.entry, self.entry)
+
+   def test_blank_data(self):
+       form = CommentForm({}, entry=self.entry)
+       self.assertFalse(form.is_valid())
+       self.assertEqual(form.errors, {
+        'name': ['This field is required.'],
+        'email': ['This field is required.'],
+        'body': ['This field is required.'],
+        })
+
