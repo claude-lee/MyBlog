@@ -3,6 +3,7 @@ from .models import Entry
 from django.contrib.auth import get_user_model
 from .forms import CommentForm
 from .models import Entry, Comment
+from django_webtest import WebTest
 
 
 class EntryModelTest(TestCase):
@@ -46,7 +47,7 @@ class HomePageTests(TestCase):
        self.assertContains(response, 'There are no blog entries yet.')
 
 
-class EntryViewTest(TestCase):
+class EntryViewTest(WebTest):
 
 
    def setUp(self):
@@ -69,7 +70,30 @@ class EntryViewTest(TestCase):
        response = self.client.get(self.entry.get_absolute_url())
        self.assertContains(response, self.entry.body)
 
-   #def test_one_comment(self):
+   def test_no_comments_yet(self):
+      response = self.client.get(self.entry.get_absolute_url())
+      # print response
+      self.assertContains(response, 'No comments yet.')
+
+   def test_view_page(self):
+       page = self.app.get(self.entry.get_absolute_url())
+       self.assertEqual(len(page.forms), 1)
+
+   def test_form_error(self):
+       page = self.app.get(self.entry.get_absolute_url())
+       page = page.form.submit()
+       self.assertContains(page, "This field is required.")
+
+   def test_form_success(self): # 403 FORBIDDEN
+       page = self.app.get(self.entry.get_absolute_url())
+       page.form['name'] = "Phillip"
+       page.form['email'] = "phillip@example.com"
+       page.form['body'] = "Test comment body."
+       page = page.form.submit()
+       self.assertRedirects(page, self.entry.get_absolute_url())
+
+
+   # def test_one_comment(self): # blog_comment.entry_id may not be NULL
    #    Comment.objects.create(entry=Entry(title="My entry title"), name='1-peter', email='1-claude@g.com', body='1-body')
    #    response = self.client.get('/')
    #    self.assertContains(response, 'My entry title')
@@ -77,9 +101,6 @@ class EntryViewTest(TestCase):
    #    self.assertContains(response, '1-claude@g.com')
    #    self.assertContains(response, '1-body')
 
-   #def test_no_comments_yet(self):
-   #    response = self.client.get('/')
-   #    self.assertContains(response, 'No comments yet.')
 
 class CommentModelTest(TestCase):
 
@@ -93,7 +114,7 @@ class CommentModelTest(TestCase):
 class CommentFormTest(TestCase):
 
    def setUp(self):
-       user = get_user_model().objects.create_user('zoidberg')
+       user = get_user_model().objects.create_user('lisa')
        self.entry = Entry.objects.create(author=user, title="My entry title")
 
    def test_init(self):

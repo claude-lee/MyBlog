@@ -20,3 +20,4 @@ class CommentForm(forms.ModelForm):
         comment.entry = self.entry
         comment.save()
         return comment
+
