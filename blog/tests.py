@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from .forms import CommentForm
 from .models import Entry, Comment
 from django_webtest import WebTest
+from django.template import Template, Context
 
 
 class EntryModelTest(TestCase):
@@ -146,3 +147,29 @@ class CommentFormTest(TestCase):
         'body': ['This field is required.'],
         })
 
+
+class EntryHistoryTagTest(TestCase):
+
+
+    TEMPLATE = Template("{% load blog_tags %} {% entry_history %}")
+
+    def setUp(self):
+        self.user = get_user_model().objects.create(username='zoidberg')
+        self.entry = Entry.objects.create(author=self.user, title="My entry title")
+
+    def test_entry_shows_up(self):
+        rendered = self.TEMPLATE.render(Context({}))
+        self.assertIn(self.entry.title, rendered)
+
+    # def test_no_posts(self): # FAIL
+    #     rendered = self.TEMPLATE.render(Context({}))
+    #     # import pdb; pdb.set_trace()
+    #     self.assertIn("No recent entries", rendered)
+
+    def test_many_posts(self):
+        for n in range(1,6):
+            Entry.objects.create(author=self.user, title="Post #{0}".format(n))
+        rendered = self.TEMPLATE.render(Context({}))
+        # import pdb; pdb.set_trace()
+        self.assertIn("Post #5", rendered)
+        self.assertNotIn("Post #6", rendered)
