@@ -5,6 +5,8 @@ from .forms import CommentForm
 from .models import Entry, Comment
 from django_webtest import WebTest
 from django.template import Template, Context
+from django.template.defaultfilters import slugify
+import datetime
 
 
 class EntryModelTest(TestCase):
@@ -85,14 +87,13 @@ class EntryViewTest(WebTest):
        page = page.form.submit()
        self.assertContains(page, "This field is required.")
 
-   def test_form_success(self): # 403 FORBIDDEN
+   def test_form_success(self):
        page = self.app.get(self.entry.get_absolute_url())
        page.form['name'] = "Phillip"
        page.form['email'] = "phillip@example.com"
        page.form['body'] = "Test comment body."
        page = page.form.submit()
        self.assertRedirects(page, self.entry.get_absolute_url())
-
 
    # def test_one_comment(self): # blog_comment.entry_id may not be NULL
    #    Comment.objects.create(entry=Entry(title="My entry title"), name='1-peter', email='1-claude@g.com', body='1-body')
