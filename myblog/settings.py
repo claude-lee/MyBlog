@@ -23,6 +23,7 @@ SECRET_KEY = '*pjp-xwc4xdag$h=o(t%gji^vn(xkuhm9^88pak77ev&z6vrh4'
 # DEBUG = True
 
 # TEMPLATE_DEBUG = True
+DEBUG = os.environ.get('DEBUG', False) #config:unset DEBUG
 
 # ALLOWED_HOSTS = []
 
@@ -109,7 +110,7 @@ ALLOWED_HOSTS = ['.herokuapp.com']
 # Static asset configuration
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = root('staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
