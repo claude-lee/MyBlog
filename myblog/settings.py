@@ -23,7 +23,8 @@ SECRET_KEY = '*pjp-xwc4xdag$h=o(t%gji^vn(xkuhm9^88pak77ev&z6vrh4'
 # DEBUG = True
 
 # TEMPLATE_DEBUG = True
-DEBUG = os.environ.get('DEBUG', False) #config:unset DEBUG
+# DEBUG = os.environ.get('DEBUG', False) #config:unset DEBUG
+DEBUG = TRUE
 
 # ALLOWED_HOSTS = []
 
