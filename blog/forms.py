@@ -10,7 +10,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('name', 'email', 'body')
 
-
     def __init__(self, *args, **kwargs):
         self.entry = kwargs.pop('entry')   # the blog entry instance
         super(CommentForm, self).__init__(*args, **kwargs)
