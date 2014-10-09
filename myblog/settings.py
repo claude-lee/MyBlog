@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'blog',
     'social_auth',
     #'south',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,6 +57,14 @@ ROOT_URLCONF = 'myblog.urls'
 
 WSGI_APPLICATION = 'myblog.wsgi.application'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'officialnoobmusic'
+EMAIL_HOST_PASSWORD = ''
+SERVER_EMAIL = 'my_blog@gmail.com'
+DEFAULT_FROM_EMAIL =''
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -79,7 +88,67 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
+# TWITTER_CONSUMER_KEY         = ''
+# TWITTER_CONSUMER_SECRET      = ''
+# FACEBOOK_APP_ID              = ''
+# FACEBOOK_API_SECRET          = ''
+# LINKEDIN_CONSUMER_KEY        = ''
+# LINKEDIN_CONSUMER_SECRET     = ''
+# ORKUT_CONSUMER_KEY           = ''
+# ORKUT_CONSUMER_SECRET        = ''
+# GOOGLE_CONSUMER_KEY          = ''
+# GOOGLE_CONSUMER_SECRET       = ''
+# FOURSQUARE_CONSUMER_KEY      = ''
+# FOURSQUARE_CONSUMER_SECRET   = ''
+# VK_APP_ID                    = ''
+# VK_API_SECRET                = ''
+# LIVE_CLIENT_ID               = ''
+# LIVE_CLIENT_SECRET           = ''
+# SKYROCK_CONSUMER_KEY         = ''
+# SKYROCK_CONSUMER_SECRET      = ''
+# YAHOO_CONSUMER_KEY           = ''
+# YAHOO_CONSUMER_SECRET        = ''
+# READABILITY_CONSUMER_SECRET  = ''
+# READABILITY_CONSUMER_SECRET  = ''
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
+SOCIAL_AUTH_BACKEND_ERROR_URL = '/new-error-url/'
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_INACTIVE_USER_URL = '...'
+SOCIAL_AUTH_UID_LENGTH = 223
+# SOCIAL_AUTH_MODELS = 'social_auth.db.mongoengine_models'
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UUID_LENGTH = 16
+# SOCIAL_AUTH_SLUGIFY_USERNAMES = True
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
+GOOGLE_OAUTH2_CLLIENT_ID = '605171731403-8nd6munnqnidlq38be6gv76d59kr7g5n.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'YPeXhv_xvfKD5qInx8BIRyaW'
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    #'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.user.get_username',
+    # 'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details'
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -118,3 +187,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+import sys
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "blog"))
+
+# goole testing
+TEST_GOOGLE_USER = 'testing_account@gmail.com'
+TEST_GOOGLE_PASSWORD = 'password_for_testing_account'

@@ -15,11 +15,13 @@ class Entry(models.Model):
        return self.title
 
    def get_absolute_url(self):
-       return reverse('blog.views.entry_detail', kwargs={'pk': self.pk})
+       #return reverse('blog.views.entry_detail', kwargs={'pk': self.pk})
+    return ('blog', [self.slug])
 
 
    class Meta:
       verbose_name_plural = "entries"
+
 
    def save(self, *args, **kwargs):
        self.slug = slugify(self.title)
