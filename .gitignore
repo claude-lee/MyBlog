@@ -5,3 +5,4 @@ venv
 logs.md
 .coverage
 .coveragerc
+htmlcov
