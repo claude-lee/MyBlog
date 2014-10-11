@@ -1,1 +1,1 @@
-web: python manage.py runserver; gunicorn myblog.wsgi
+web: python manage.py runserver "0.0.0.0:$PORT"; gunicorn myblog.wsgi
