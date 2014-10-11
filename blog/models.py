@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
 class Entry(models.Model):
@@ -14,7 +15,7 @@ class Entry(models.Model):
        return self.title
 
    def get_absolute_url(self):
-    return ('blog', [self.slug])
+       return reverse('blog.views.entry_detail', kwargs={'pk': self.pk})
 
 
    class Meta:
