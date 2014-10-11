@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '*pjp-xwc4xdag$h=o(t%gji^vn(xkuhm9^88pak77ev&z6vrh4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 # TEMPLATE_DEBUG = True
 # DEBUG = os.environ.get('DEBUG', False) #config:unset DEBUG
-DEBUG = True
+
 
 # ALLOWED_HOSTS = []
 
@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     'social_auth',
-    #'south',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,29 +92,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# TWITTER_CONSUMER_KEY         = ''
-# TWITTER_CONSUMER_SECRET      = ''
-# FACEBOOK_APP_ID              = ''
-# FACEBOOK_API_SECRET          = ''
-# LINKEDIN_CONSUMER_KEY        = ''
-# LINKEDIN_CONSUMER_SECRET     = ''
-# ORKUT_CONSUMER_KEY           = ''
-# ORKUT_CONSUMER_SECRET        = ''
-# GOOGLE_CONSUMER_KEY          = ''
-# GOOGLE_CONSUMER_SECRET       = ''
-# FOURSQUARE_CONSUMER_KEY      = ''
-# FOURSQUARE_CONSUMER_SECRET   = ''
-# VK_APP_ID                    = ''
-# VK_API_SECRET                = ''
-# LIVE_CLIENT_ID               = ''
-# LIVE_CLIENT_SECRET           = ''
-# SKYROCK_CONSUMER_KEY         = ''
-# SKYROCK_CONSUMER_SECRET      = ''
-# YAHOO_CONSUMER_KEY           = ''
-# YAHOO_CONSUMER_SECRET        = ''
-# READABILITY_CONSUMER_SECRET  = ''
-# READABILITY_CONSUMER_SECRET  = ''
-
 LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/logged-in/'
 LOGIN_ERROR_URL    = '/login-error/'
@@ -143,7 +120,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
     #'social_auth.backends.pipeline.associate.associate_by_email',
     'social_auth.backends.pipeline.user.get_username',
-    # 'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.user.create_user', # was commented out
     'social_auth.backends.pipeline.social.associate_user',
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details'
