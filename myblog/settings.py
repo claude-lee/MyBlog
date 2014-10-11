@@ -26,9 +26,6 @@ DEBUG = True
 # DEBUG = os.environ.get('DEBUG', False) #config:unset DEBUG
 
 
-# ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -128,14 +125,6 @@ SOCIAL_AUTH_PIPELINE = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
-
-
-
-STATICFILES_DIRS = (
-   os.path.join(BASE_DIR, 'static'),
-)
-
 
 # Template files
 # https://docs.djangoproject.com/en/1.6/topics/templates/
@@ -155,8 +144,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['.herokuapp.com']
 
 # Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
