@@ -3,3 +3,5 @@ venv
 .idea
 .env
 logs.md
+.coverage
+.coveragerc
