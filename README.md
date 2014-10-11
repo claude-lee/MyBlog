@@ -28,18 +28,18 @@ First thing to do is to get all the required python packages.
 Install them by running the following command.
 Make sure you are in the project's root directory, the one with the file requirements.txt.
 
->> pip install -r requirements.txt
+$ pip install -r requirements.txt
 
 Then when you do some modifications on your app, do the following:
 
->> git add .
+$ git add .
 
->> git commit -m "describing the update"
+$ git commit -m "describing the update"
 
-[>> heroku run ./manage.py syncdb # only first time, then use south]
+[$ heroku run ./manage.py syncdb # only first time, then use south]
 
 ###################################################################
->> ./manage.py schemamigration blog
+$ ./manage.py schemamigration blog
 > git add blog/migrations/*
 > git commit -m 'adding new migrations for blog'
 > git push heroku master
