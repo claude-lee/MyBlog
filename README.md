@@ -40,52 +40,52 @@ $ git commit -m "describing the update"
 
 ###################################################################
 $ ./manage.py schemamigration blog
-> git add blog/migrations/*
-> git commit -m 'adding new migrations for blog'
-> git push heroku master
-> heroku run ./manage.py migrate blog
+$ git add blog/migrations/*
+$ git commit -m 'adding new migrations for blog'
+$ git push heroku master
+$ heroku run ./manage.py migrate blog
 #####################################################################
 -> add 'south' to list of INSTALLED_APPS in settings.py
 
-> ./manage.py syncdb # Run syncdb locally:
+$ ./manage.py syncdb # Run syncdb locally:
 
-> ./manage.py convert_to_south django_app # Convert your project to use South:
+$ ./manage.py convert_to_south django_app # Convert your project to use South:
 
 -> modify models.py
 
-> ./manage.py schemamigration blog --auto # Set up the schema:
+$ ./manage.py schemamigration blog --auto # Set up the schema:
 
-> ./manage.py migrate blog # to perform the migration
+$ ./manage.py migrate blog # to perform the migration
 
-> add South==0.8.4 to requirements.txt
+$ add South==0.8.4 to requirements.txt
 
-> git add blog/migrations/* # tp add the blog/migrations directory to version control
+$ git add blog/migrations/* # tp add the blog/migrations directory to version control
 
-> git commit -m 'adding new migrations for blog' # to commit all changes
+$ git commit -m 'adding new migrations for blog' # to commit all changes
 
-> git push heroku master
+$ git push heroku master
 
-> heroku run python manage.py syncdb # to run syncdb on Heroku
+$ heroku run python manage.py syncdb # to run syncdb on Heroku
 
-> heroku run python manage.py convert_to_south blog # to convert my Heroku instance of blog to use South
+$ heroku run python manage.py convert_to_south blog # to convert my Heroku instance of blog to use South
 
 
-> heroku run python manage.py migrate blog # to perform the migration
+$ heroku run python manage.py migrate blog # to perform the migration
 
 ########################################################################
 
 And what if I make further changes to myblog/blog/models.py?
 
-> python manage.py schemamigration blog --auto # to create the south migration file:
+$ python manage.py schemamigration blog --auto # to create the south migration file:
 
-> python manage.py migrate blog # to migrate locally
+$ python manage.py migrate blog # to migrate locally
 
-> git add blog/migrations/* # tp add the blog/migrations directory to version control
+$ git add blog/migrations/* # tp add the blog/migrations directory to version control
 
-> git commit -m 'adding new migrations for blog' # to commit all changes
+$ git commit -m 'adding new migrations for blog' # to commit all changes
 
-> git push heroku master
+$ git push heroku master
 
-> heroku run python manage.py migrate blog # to migrate on Heroku
+$ heroku run python manage.py migrate blog # to migrate on Heroku
 
 
