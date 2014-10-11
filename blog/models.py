@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
 class Entry(models.Model):
@@ -15,7 +14,6 @@ class Entry(models.Model):
        return self.title
 
    def get_absolute_url(self):
-       #return reverse('blog.views.entry_detail', kwargs={'pk': self.pk})
     return ('blog', [self.slug])
 
 
@@ -33,6 +31,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     body = models.TextField()
+    tag = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
 
