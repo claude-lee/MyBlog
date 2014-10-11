@@ -31,5 +31,8 @@ Make sure you are in the project's root directory, the one with the file require
 pip install -r requirements.txt
 
 
+git push heroku master
+
+
 
 

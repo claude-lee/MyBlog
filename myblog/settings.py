@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'blog',
     'social_auth',
     #'south',
-    'registration',
 )
 
 MIDDLEWARE_CLASSES = (

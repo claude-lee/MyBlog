@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     url(r'^$', views.home, name='home'),
     url(r'^'+'blogger'+'/', include('blog.urls')),
     #url(r'^', include('blog.urls')),
-    # url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'', include('social_auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
